@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UX Writing - Software – Andy Hyatt</title>
+   
+  <!-- Password protection -->
+  <script>
+    const correctPassword = "1234";
+    const entered = sessionStorage.getItem("authenticated");
+    if (entered !== correctPassword) {
+      const input = prompt("This project is password protected. Please enter the password:");
+      if (input !== correctPassword) {
+        alert("Incorrect password. Redirecting...");
+        window.location.href = "/";
+      } else {
+        sessionStorage.setItem("authenticated", correctPassword);
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accentLight: '#8b5cf6',
+            accentDark: '#39ff14'
+          },
+          boxShadow: {
+            'glow-gray': '0 0 0 0px rgba(180, 180, 180, 0.5)'
+          },
+          animation: {
+            fadeInUp: 'fadeInUp 0.5s ease-out both'
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            }
+          }
+        }
+      }
+    };
+  
+  function openLightbox(src) {
+    const lightbox = document.getElementById("lightbox");
+    const img = document.getElementById("lightbox-img");
+    img.src = src;
+    lightbox.classList.remove("hidden");
+    lightbox.classList.add("flex");
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.classList.add("hidden");
+    lightbox.classList.remove("flex");
+  }
+
+  document.getElementById("lightbox").addEventListener("click", (e) => {
+    if (e.target.id === "lightbox") closeLightbox();
+  });
+  </script>
+
+  <style>
+    .neon-glow {
+      pointer-events: none;
+      z-index: 0;
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: destination-out;
+      background: transparent;
+      background-size: 200% 200%;
+      background-repeat: no-repeat;
+      transition: background 0.2s ease;
+    }
+    .underline-animate {
+      position: relative;
+    }
+    .underline-animate::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, #8b5cf6, #39ff14);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .underline-animate:hover::after {
+      transform: scaleX(1);
+    }
+
+        #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, #8b5cf6, #39ff14);
+      z-index: 50;
+    }
+
+  </style>
+</head>
+<body class="relative text-black dark:text-white font-sans transition-colors duration-300 min-h-screen overflow-auto bg-white dark:bg-black">
+  <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-accentLight dark:bg-accentDark z-50"></div>
+  <div class="relative z-10">
+    <div id="layoutWrapper" class="max-w-xl mx-auto transition-all duration-300">
+
+        <!-- Navigation Bar (Non-floating, sticky after scroll) -->
+<nav class="sticky top-4 z-50">
+  <div class="flex justify-between items-center px-6 py-4 rounded-2xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-black shadow-sm dark:shadow-none">
+
+    <!-- Left Nav Icons -->
+    <div class="flex items-center gap-4">
+      <!-- Home -->
+      <a href="/Homepage.html" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+        <span class="material-symbols-outlined text-lg text-black dark:text-white">home</span>
+        <span class="absolute -top-6 text-xs text-white bg-black/80 dark:bg-white/90 dark:text-black px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">Home</span>
+      </a>
+
+      <!-- About -->
+      <a href="/About me.html" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+        <span class="material-symbols-outlined text-lg text-black dark:text-white">person_4</span>
+        <span class="absolute -top-6 text-xs text-white bg-black/80 dark:bg-white/90 dark:text-black px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">About</span>
+      </a>
+
+      <!-- Projects -->
+      <a href="/Projects.html" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+        <span class="material-symbols-outlined text-lg text-black dark:text-white">assignment</span>
+        <span class="absolute -top-6 text-xs text-white bg-black/80 dark:bg-white/90 dark:text-black px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">Projects</span>
+      </a>
+    </div>
+
+    <!-- Right Buttons: Expand + Theme Toggle -->
+    <div class="flex items-center gap-4">
+    <!-- Expand View Toggle -->
+    <button onclick="toggleWidth()" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 glass transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+      <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-full"></div>
+      <span id="expand-icon" class="material-symbols-outlined text-lg text-black dark:text-white transition-transform group-hover:scale-110">open_in_full</span>
+      <span id="expand-tooltip" class="absolute -top-6 w-max min-w-[80px] text-xs text-white bg-black/80 dark:bg-white/90 dark:text-black px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none text-center">Expand view</span>
+    </button>
+
+      <!-- Theme Toggle -->
+      <button onclick="toggleTheme()" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 glass transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+        <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-full"></div>
+        <span class="material-symbols-outlined text-lg text-black dark:text-white transition-colors dark:hidden z-10">dark_mode</span>
+        <span class="material-symbols-outlined text-lg text-black dark:text-white transition-colors hidden dark:inline z-10">light_mode</span>
+        <span id="theme-tooltip" class="absolute -top-6 w-max min-w-[80px] text-xs text-white bg-black/80 dark:bg-white/90 dark:text-black px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none text-center">Light mode</span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+    <!-- Page Content Wrapper -->
+<main class="bg-white/90 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-xl p-4 w-full my-10 transition-all duration-300">
+<div class="w-full px-4 py-5 space-y-10">
+
+        <!-- Project intro -->
+        <section class="text-left opacity-0 translate-y-4 transition-all duration-700 ease-out" data-observe>
+          <!-- Icon and Title -->
+          <div class="flex items-center gap-4 mb-4 pt-4">
+                        <!-- Circular Icon -->
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-black flex items-center justify-center">
+              <img src="./Resources/Images/My_Quentic.svg" alt="Quentic icon" class="w-full h-full object-cover" />
+            </div>
+            <!-- Heading -->
+            <h2 class="text-3xl font-bold">Quentic Platform</h2>
+            </div>
+
+          <!-- Description -->
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Quentic is an integrated B2B software solution that provides EHSQ and ESG management solutions for greater compliance and better safety. It's complex and has a wide range of users.
+          </p>
+          
+          <!-- Project details -->
+          <section class="opacity-0 translate-y-4 transition-all duration-700 ease-out" data-observe>
+            <div class="grid grid-cols-2 gap-x-4 gap-y-3 bg-gray-100 dark:bg-gray-900 text-xs p-4 mb-4 rounded-2xl w-full transition-all duration-300" id="projectDetailsGrid">
+
+              <!-- Company -->
+              <div>
+                <div class="text-gray-500 dark:text-gray-400">Company</div>
+                <div class="text-gray-800 dark:text-gray-100">Quentic</div>
+              </div>
+
+              <!-- Role -->
+              <div>
+                <div class="text-gray-500 dark:text-gray-400">Role</div>
+                <div class="text-gray-800 dark:text-gray-100">Content Designer</div>
+              </div>
+
+              <!-- Project type -->
+              <div>
+                <div class="text-gray-500 dark:text-gray-400">Project type</div>
+                <div class="text-gray-800 dark:text-gray-100">Content design, UX writing</div>
+              </div>
+
+              <!-- Year -->
+              <div>
+                <div class="text-gray-500 dark:text-gray-400">Year</div>
+                <div class="text-gray-800 dark:text-gray-100">2023</div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Visit website button -->
+          <a 
+            href="https://www.quentic.com/software/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="group inline-flex items-center gap-1 px-4 py-1 mb-4 rounded-full text-sm transition-colors duration-200 
+                  bg-accentLight text-white dark:bg-accentDark dark:text-black 
+                  hover:bg-transparent hover:text-accentLight hover:border-accentLight 
+                  dark:hover:bg-transparent dark:hover:text-accentDark dark:hover:border-accentDark 
+                  border border-transparent"
+          >
+            Visit website
+            <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:-rotate-45">
+              arrow_forward
+            </span>
+          </a>
+            
+          <!-- Project main image -->
+          <div class="rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-4 shadow-sm dark:shadow-none">
+            <img src="./Resources/Images/Quentic Platform.webp" alt="Quentic Platform" class="w-full h-auto object-cover rounded-lg" />
+          </div>
+        </section>
+
+        <!-- Section divider line -->
+        <div class="h-0.5 w-1/4 mx-auto my-12 bg-gradient-to-r from-[#8b5cf6] to-[#39ff14] rounded-full"></div>
+
+        <!-- Project details 1 -->
+        <section class="opacity-0 translate-y-4 transition-all duration-700 ease-out" data-observe>
+          <div class="flex items-center gap-2 mb-2 underline-animate">
+            <span class="w-2.5 h-2.5 rotate-45 bg-gradient-to-br from-green-400 to-purple-500"></span>
+            <h3 class="text-lg font-semibold">Start page redesign</h3>
+          </div>          
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">I collaborated on redesigning the Quentic start page to improve usability and task efficiency. The original layout was cluttered and required extensive scrolling, making it hard for users to find key actions. I grouped related widgets, streamlined the content, and introduced clear, consistent labels—helping users complete EHS tasks faster and with more confidence.</p>
+       <!-- Image comparison -->
+          <!-- BEFORE IMAGE -->
+        <div class="text-center group">
+        <div class="relative rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-8 shadow-sm dark:shadow-none transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark">
+            <img
+            src="./Resources/Images/Quentic platform_before.webp"
+            alt="Before redesign"
+            class="w-full h-auto object-cover rounded-lg cursor-pointer"
+            onclick="openLightbox('./Resources/Images/Quentic platform_before.webp')"
+            />
+            <!-- Zoom Button -->
+            <button
+            onclick="openLightbox('./Resources/Images/Quentic platform_before.webp')"
+            class="absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/50 text-black dark:text-white transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark"
+            aria-label="Zoom in"
+            >
+            <span class="material-symbols-outlined text-base">zoom_in</span>
+            </button>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">Before</p>
+        </div>
+
+        <!-- AFTER IMAGE -->
+        <div class="text-center group mt-6">
+        <div class="relative rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-8 shadow-sm dark:shadow-none transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark">
+            <img
+            src="./Resources/Images/Quentic Platform.webp"
+            alt="After redesign"
+            class="w-full h-auto object-cover rounded-lg cursor-pointer"
+            onclick="openLightbox('./Resources/Images/Quentic Platform.webp')"
+            />
+            <!-- Zoom Button -->
+            <button
+            onclick="openLightbox('./Resources/Images/Quentic Platform.webp')"
+            class="absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/50 text-black dark:text-white transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark"
+            aria-label="Zoom in"
+            >
+            <span class="material-symbols-outlined text-base">zoom_in</span>
+            </button>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">After</p>
+        </div>
+        </section>
+
+        <!-- Section divider line -->
+        <div class="h-0.5 w-1/4 mx-auto my-12 bg-gradient-to-r from-[#8b5cf6] to-[#39ff14] rounded-full"></div>
+
+        <!-- Project details 2 -->
+        <section class="opacity-0 translate-y-4 transition-all duration-700 ease-out" data-observe>
+          <div class="flex items-center gap-2 mb-2 underline-animate">
+            <span class="w-2.5 h-2.5 rotate-45 bg-gradient-to-br from-green-400 to-purple-500"></span>
+            <h3 class="text-lg font-semibold">Enhancing empty state messages</h3>
+          </div>          
+          <h4 class="text-m mb-2">Challenge</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">The previous empty state simply displayed "No data records available," offering no context or support. Users were left uncertain about what the screen meant or what they should do next.</p>
+       <!-- Image comparison -->
+          <!-- BEFORE IMAGE -->
+        <div class="text-center group">
+        <div class="relative rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-8 shadow-sm dark:shadow-none transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark">
+            <img
+            src="./Resources/Images/Empty state_before.webp"
+            alt="Before redesign"
+            class="w-full h-auto object-cover rounded-lg cursor-pointer"
+            onclick="openLightbox('./Resources/Images/Empty state_before.webp')"
+            />
+            <!-- Zoom Button -->
+            <button
+            onclick="openLightbox('./Resources/Images/Empty state_before.webp')"
+            class="absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/50 text-black dark:text-white transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark"
+            aria-label="Zoom in"
+            >
+            <span class="material-symbols-outlined text-base">zoom_in</span>
+            </button>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">Before</p>
+        </div>
+
+        <!-- AFTER IMAGE -->
+        <div class="text-center group mt-6">
+        <div class="relative rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-8 shadow-sm dark:shadow-none transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark">
+            <img
+            src="./Resources/Images/Empty state_after.webp"
+            alt="After redesign"
+            class="w-full h-auto object-cover rounded-lg cursor-pointer"
+            onclick="openLightbox('./Resources/Images/Empty state_after.webp')"
+            />
+            <!-- Zoom Button -->
+            <button
+            onclick="openLightbox('./Resources/Images/Empty state_after.webp')"
+            class="absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/50 text-black dark:text-white transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark"
+            aria-label="Zoom in"
+            >
+            <span class="material-symbols-outlined text-base">zoom_in</span>
+            </button>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">After</p>
+      </div>
+                <h4 class="text-m mb-2">Solution</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">I reworked the empty state content to be more informative and action-oriented. The updated design introduces a clear message explaining why the page is empty, alongside guidance on what steps to take—such as adding application/storage areas or learning more through support links.</p>
+                <h4 class="text-m mb-2">Outcome</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">This thoughtful messaging helped transform a dead-end into a helpful moment. It increased user confidence, reduced support tickets related to confusion, and encouraged users to complete setup tasks without hesitation.</p>
+        </section>
+
+        <!-- Section divider line -->
+        <div class="h-0.5 w-1/4 mx-auto my-12 bg-gradient-to-r from-[#8b5cf6] to-[#39ff14] rounded-full"></div>
+
+        <!-- Project details 3 -->
+        <section class="opacity-0 translate-y-4 transition-all duration-700 ease-out" data-observe>
+          <div class="flex items-center gap-2 mb-2 underline-animate">
+            <span class="w-2.5 h-2.5 rotate-45 bg-gradient-to-br from-green-400 to-purple-500"></span>
+            <h3 class="text-lg font-semibold">Data record redesign</h3>
+          </div>          
+          <h4 class="text-m mb-2">Challenge</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">The original data recording interface was cluttered and difficult to navigate. Vague labels, unclear button texts, and inconsistent status indicators made it hard for users to understand their next steps, often leading to frustration and delays.</p>
+       <!-- Image comparison -->
+          <!-- BEFORE IMAGE -->
+        <div class="text-center group">
+        <div class="relative rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-8 shadow-sm dark:shadow-none transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark">
+            <img
+            src="./Resources/Images/Data record_before.webp"
+            alt="Before redesign"
+            class="w-full h-auto object-cover rounded-lg cursor-pointer"
+            onclick="openLightbox('./Resources/Images/Data record_before.webp')"
+            />
+            <!-- Zoom Button -->
+            <button
+            onclick="openLightbox('./Resources/Images/Data record_before.webp')"
+            class="absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/50 text-black dark:text-white transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark"
+            aria-label="Zoom in"
+            >
+            <span class="material-symbols-outlined text-base">zoom_in</span>
+            </button>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">Before</p>
+        </div>
+
+        <!-- AFTER IMAGE -->
+        <div class="text-center group mt-6">
+        <div class="relative rounded-xl border border-gray-300 dark:border-gray-700 p-1 mt-8 shadow-sm dark:shadow-none transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark">
+            <img
+            src="./Resources/Images/Data record_after.webp"
+            alt="After redesign"
+            class="w-full h-auto object-cover rounded-lg cursor-pointer"
+            onclick="openLightbox('./Resources/Images/Data record_after.webp')"
+            />
+            <!-- Zoom Button -->
+            <button
+            onclick="openLightbox('./Resources/Images/Data record_after.webp')"
+            class="absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/50 text-black dark:text-white transition-colors duration-200 group-hover:border-accentLight dark:group-hover:border-accentDark"
+            aria-label="Zoom in"
+            >
+            <span class="material-symbols-outlined text-base">zoom_in</span>
+            </button>
+        </div>
+                      <p class="text-xs text-gray-500 mt-2">After</p>
+
+      </div>
+                <h4 class="text-m mb-2">Solution</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">I rewrote interface content using clear, concise, and actionable language. Buttons were updated to reflect specific actions—like “Notify person in charge”—making their function immediately obvious. I restructured the layout to group related fields logically and made the current status stand out visually. To support users when fields were empty, I introduced helpful inline prompts like “No scopes added – Link scope.”</p>
+                <h4 class="text-m mb-2">Outcome</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-8">The redesign made the data recording experience significantly more intuitive and efficient. It helped users complete tasks with greater confidence and fewer errors. The new structure also supported better consistency across multiple languages—an important factor in a global product environment.</p>
+
+        </section>
+      
+
+        <!-- Other projects -->
+        <section>
+          <!-- Header and Button -->
+        <div class="flex justify-between items-center underline-animate mb-4 pt-8 w-full">
+          <h3 class="text-lg font-semibold">Other projects</h3>
+        <a 
+          href="/Projects.html" 
+          class="group inline-flex items-center gap-1 px-4 py-1 rounded-full text-sm transition-colors duration-200 
+                bg-accentLight text-white dark:bg-accentDark dark:text-black 
+                hover:bg-transparent hover:text-accentLight hover:border-accentLight 
+                dark:hover:bg-transparent dark:hover:text-accentDark dark:hover:border-accentDark 
+                border border-transparent"
+        >
+          View all
+          <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:-rotate-45">
+            arrow_forward
+          </span>
+        </a>
+        </div>
+          <div class="space-y-4">
+            <!-- Project 1 -->
+            <a href="/project-ux-writing" class="neon-card group relative flex items-center gap-6 rounded-xl overflow-hidden border border-gray-500/30 dark:border-gray-500/40 glass p-4 hover:shadow-glow-gray transition-shadow duration-200">
+              <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+              <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors z-10">edit</span>
+              <div class="relative z-10">
+                <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">UX Writing for Mobile App</h3>
+                <p class="text-sm text-gray-600">Improved onboarding by rewriting UI copy, reducing drop-off by 20%.</p>
+              </div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="/project-content-strategy" class="neon-card group relative flex items-center gap-6 rounded-xl overflow-hidden border border-gray-500/30 dark:border-gray-500/40 glass p-4 hover:shadow-glow-gray transition-shadow duration-200">
+              <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+              <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors z-10">insights</span>
+              <div class="relative z-10">
+                <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">Content Strategy for SaaS</h3>
+                <p class="text-sm text-gray-600">Revamped help docs to improve search discoverability and user experience.</p>
+              </div>
+            </a>
+
+            <!-- Project 3 -->
+            <a href="/project-microcopy-guidelines" class="neon-card group relative flex items-center gap-6 rounded-xl overflow-hidden border border-gray-500/30 dark:border-gray-500/40 glass p-4 hover:shadow-glow-gray transition-shadow duration-200">
+              <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+              <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors z-10">library_books</span>
+              <div class="relative z-10">
+                <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">
+Microcopy Guidelines</h3>
+                <p class="text-sm text-gray-600">Created tone and voice guidelines for a fintech product.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="relative p-6 text-center">
+          <div class="relative z-10">
+            <h2 class="text-lg font-semibold mb-2">Let’s work together</h2>
+            <p class="text-sm text-gray-600 mb-4">Open to freelance and collaboration opportunities.</p>
+            <div class="flex gap-2 justify-center">
+              <a href="/contact" class="px-4 py-1 rounded-full text-sm border border-transparent transition-colors duration-200 bg-accentLight dark:bg-accentDark text-white dark:text-black hover:bg-transparent dark:hover:bg-accentDark/10 hover:border-accentLight dark:hover:border-accentDark hover:text-accentLight dark:hover:text-accentDark">Hire Me</a>
+              <a href="mailto:you@example.com" class="px-4 py-1 rounded-full text-sm transition-colors duration-200 bg-transparent text-accentLight dark:text-accentDark border border-accentLight dark:border-accentDark hover:bg-accentLight dark:hover:bg-accentDark hover:text-white dark:hover:text-black">Copy Email</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Follow Me Section -->
+        <section class="flex items-center justify-between px-6 py-4 border border-gray-500/30 dark:border-gray-500/40 glass rounded-2xl">
+          <h3 class="text-base font-semibold">Follow Me</h3>
+          <div class="flex items-center gap-4">
+            <a href="#" class="group w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/30 dark:border-gray-500/40 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+              <img src="Resources/Images/linkedin_dark.svg" alt="LinkedIn" class="w-5 h-5 dark:hidden" />
+              <img src="Resources/Images/linkedin_light.svg" alt="LinkedIn" class="w-5 h-5 hidden dark:inline" />
+            </a>
+            <a href="#" class="group w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/30 dark:border-gray-500/40 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+              <img src="Resources/Images/dribble_dark.svg" alt="Dribbble" class="w-5 h-5 dark:hidden" />
+              <img src="Resources/Images/dribble_light.svg" alt="Dribbble" class="w-5 h-5 hidden dark:inline" />
+            </a>
+            <a href="#" class="group w-10 h-10 flex items-center justify-center rounded-full border border-gray-500/30 dark:border-gray-500/40 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+              <img src="Resources/Images/instagram_dark.svg" alt="Instagram" class="w-5 h-5 dark:hidden" />
+              <img src="Resources/Images/instagram_light.svg" alt="Instagram" class="w-5 h-5 hidden dark:inline" />
+            </a>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-gray-600 pt-6">
+          © 2025 Andy Hyatt — Content Designer
+        </footer>
+<div
+  id="lightbox"
+  class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center"
+>
+  <img id="lightbox-img" src="" class="max-w-[90%] max-h-[90%] rounded-lg shadow-xl" />
+  <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+</div>
+ </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function updateGlow(card, x, y) {
+      const isDark = document.documentElement.classList.contains('dark');
+      const color = isDark ? '#39ff14' : '#8b5cf6';
+      const glow = card.querySelector('.neon-glow');
+      glow.style.background = `radial-gradient(circle at ${x}% ${y}%, ${color} 0%, transparent 60%)`;
+    }
+
+    document.querySelectorAll('.neon-card').forEach(card => {
+      const glow = card.querySelector('.neon-glow');
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        updateGlow(card, x, y);
+      });
+      card.addEventListener('mouseleave', () => {
+        glow.style.background = '';
+      });
+    });
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    const bg = document.getElementById('background-image');
+    document.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 50;
+      const y = (e.clientY / window.innerHeight - 0.5) * 50;
+      bg.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const tooltip = document.getElementById('theme-tooltip');
+      const isDark = root.classList.contains('dark');
+      root.classList.toggle('dark');
+      if (tooltip) tooltip.textContent = isDark ? 'Dark mode' : 'Light mode';
+    }
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const width = (scrollTop / docHeight) * 100;
+      document.getElementById("progress-bar").style.width = `${width}%`;
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-4');
+        }
+      });
+    });
+    document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
+
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+      max: 5,
+      speed: 300,
+      glare: false
+    });
+  
+        function toggleWidth() {
+  const layout = document.getElementById("layoutWrapper");
+  const icon = document.getElementById("expand-icon");
+  const tooltip = document.getElementById("expand-tooltip");
+
+  const isExpanded = layout.classList.contains("max-w-6xl");
+
+  layout.classList.toggle("max-w-xl");
+  layout.classList.toggle("max-w-6xl");
+
+  if (isExpanded) {
+    icon.textContent = "open_in_full";
+    tooltip.textContent = "Expand view";
+  } else {
+    icon.textContent = "close_fullscreen";
+    tooltip.textContent = "Contract view";
+  }
+}
+
+  </script>
+</body>
+</html>
