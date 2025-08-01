@@ -142,12 +142,14 @@
 
     <!-- Right Buttons: Expand + Theme Toggle -->
     <div class="flex items-center gap-4">
-        <!-- Expand View Toggle -->
-        <button onclick="toggleWidth()" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 glass transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
+    <!-- Expand View Toggle (hidden on mobile) -->
+    <div class="hidden sm:block">
+      <button onclick="toggleWidth()" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 glass transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
         <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-full"></div>
         <span id="expand-icon" class="material-symbols-outlined text-lg text-black dark:text-white transition-transform group-hover:scale-110">open_in_full</span>
         <span id="expand-tooltip" class="absolute -top-6 w-max min-w-[80px] text-xs text-white bg-black/80 dark:bg-white/90 dark:text-black px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none text-center">Expand view</span>
-        </button>
+      </button>
+    </div>
 
       <!-- Theme Toggle -->
       <button onclick="toggleTheme()" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 glass transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
