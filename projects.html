@@ -33,6 +33,10 @@
     };
   </script>
   <style>
+    html {
+  overflow-y: scroll;
+}
+
     .neon-glow {
       pointer-events: none;
       z-index: 0;
@@ -49,6 +53,7 @@
       background-repeat: no-repeat;
       transition: background 0.2s ease;
     }
+
     .underline-animate {
       position: relative;
     }
@@ -77,6 +82,21 @@
       z-index: 50;
     }
 
+        @keyframes gradientLoop {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+    .animate-gradient-loop {
+      background: linear-gradient(270deg, #8b5cf6, #39ff14, #8b5cf6);
+      background-size: 200% 200%;
+      animation: gradientLoop 8s linear infinite;
+    }
+
   </style>
 </head>
 <body class="relative text-black dark:text-white font-sans transition-colors duration-300 min-h-screen overflow-auto bg-white dark:bg-black">
@@ -91,6 +111,16 @@
 
     <!-- Left Nav Icons -->
     <div class="flex items-center gap-4">
+
+          <!-- Brand Mark (Initials with looping gradient) -->
+    <div class="relative group w-7 h-7 rounded-full overflow-hidden flex items-center justify-center text-[10px] font-bold text-white animate-gradient-loop select-none pointer-events-none">
+      AH
+      <!-- Tooltip (optional) -->
+      <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-black text-white px-2 py-1 rounded pointer-events-none whitespace-nowrap">
+        Andy Hyatt – Content Designer
+      </div>
+    </div>
+
       <!-- Home -->
       <a href="index.html" class="group relative w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 transition-colors duration-200 hover:border-accentLight dark:hover:border-accentDark">
         <span class="material-symbols-outlined text-lg text-black dark:text-white">home</span>
@@ -140,41 +170,85 @@
           <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Discover my portfolio, where purposeful interfaces meet captivating design. My work strives to enhance experiences and inspire.</p>
         </section>
 
-        <!-- Projects -->
-        <section>
-          <h3 class="text-lg font-semibold underline-animate mb-2">Selected work</h3>
-          <div class="space-y-4">
-            <!-- Project 1 -->
-            <a href="/project-ux-writing" class="neon-card group relative flex items-center gap-6 rounded-xl overflow-hidden border border-gray-500/30 dark:border-gray-500/40 glass p-4 hover:shadow-glow-gray transition-shadow duration-200">
-              <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-              <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors z-10">edit</span>
-              <div class="relative z-10">
-                <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">UX Writing for Mobile App</h3>
-                <p class="text-sm text-gray-600">Improved onboarding by rewriting UI copy, reducing drop-off by 20%.</p>
-              </div>
-            </a>
+<!-- Projects -->
+<section>
+  <h3 class="text-lg font-semibold underline-animate mb-2">Selected work</h3>
+  <div class="space-y-4">
 
-            <!-- Project 2 -->
-            <a href="/project-content-strategy" class="neon-card group relative flex items-center gap-6 rounded-xl overflow-hidden border border-gray-500/30 dark:border-gray-500/40 glass p-4 hover:shadow-glow-gray transition-shadow duration-200">
-              <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-              <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors z-10">insights</span>
-              <div class="relative z-10">
-                <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">Content Strategy for SaaS</h3>
-                <p class="text-sm text-gray-600">Revamped help docs to improve search discoverability and user experience.</p>
-              </div>
-            </a>
+    <!-- Project 1 -->
+    <a href="/project-ux-writing" class="group relative flex items-center justify-between gap-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-black/30 p-4 transition-all duration-200 
+       hover:shadow-[0_0_0_2px_#e5e7eb] dark:hover:shadow-[0_0_0_2px_#6b7280] 
+       hover:border-accentLight dark:hover:border-accentDark">
 
-            <!-- Project 3 -->
-            <a href="/project-microcopy-guidelines" class="neon-card group relative flex items-center gap-6 rounded-xl overflow-hidden border border-gray-500/30 dark:border-gray-500/40 glass p-4 hover:shadow-glow-gray transition-shadow duration-200">
-              <div class="neon-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-              <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors z-10">library_books</span>
-              <div class="relative z-10">
-                <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">Microcopy Guidelines</h3>
-                <p class="text-sm text-gray-600">Created tone and voice guidelines for a fintech product.</p>
-              </div>
-            </a>
-          </div>
-        </section>
+      <!-- Left Icon and Text -->
+      <div class="flex items-center gap-4">
+        <!-- Icon -->
+        <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">
+          edit
+        </span>
+        <!-- Text Content -->
+        <div>
+          <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">UX Writing for Mobile App</h3>
+          <p class="text-sm text-gray-600">Improved onboarding by rewriting UI copy, reducing drop-off by 20%.</p>
+        </div>
+      </div>
+
+      <!-- Arrow Icon -->
+      <span class="material-symbols-outlined text-base text-gray-500 transition-transform duration-300 group-hover:-rotate-45">
+        arrow_forward
+      </span>
+    </a>
+
+    <!-- Project 2 -->
+    <a href="/project-ux-writing" class="group relative flex items-center justify-between gap-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-black/30 p-4 transition-all duration-200 
+       hover:shadow-[0_0_0_2px_#e5e7eb] dark:hover:shadow-[0_0_0_2px_#6b7280] 
+       hover:border-accentLight dark:hover:border-accentDark">
+
+      <!-- Left Icon and Text -->
+      <div class="flex items-center gap-4">
+        <!-- Icon -->
+        <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">
+          edit
+        </span>
+        <!-- Text Content -->
+        <div>
+          <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">UX Writing for Mobile App</h3>
+          <p class="text-sm text-gray-600">Improved onboarding by rewriting UI copy, reducing drop-off by 20%.</p>
+        </div>
+      </div>
+
+      <!-- Arrow Icon -->
+      <span class="material-symbols-outlined text-base text-gray-500 transition-transform duration-300 group-hover:-rotate-45">
+        arrow_forward
+      </span>
+    </a>
+
+    <!-- Project 3 -->
+    <a href="/project-ux-writing" class="group relative flex items-center justify-between gap-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/50 dark:bg-black/30 p-4 transition-all duration-200 
+       hover:shadow-[0_0_0_2px_#e5e7eb] dark:hover:shadow-[0_0_0_2px_#6b7280] 
+       hover:border-accentLight dark:hover:border-accentDark">
+
+      <!-- Left Icon and Text -->
+      <div class="flex items-center gap-4">
+        <!-- Icon -->
+        <span class="material-symbols-outlined text-3xl text-gray-600 group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">
+          edit
+        </span>
+        <!-- Text Content -->
+        <div>
+          <h3 class="text-base font-medium text-black dark:text-white group-hover:text-accentLight dark:group-hover:text-accentDark transition-colors">UX Writing for Mobile App</h3>
+          <p class="text-sm text-gray-600">Improved onboarding by rewriting UI copy, reducing drop-off by 20%.</p>
+        </div>
+      </div>
+
+      <!-- Arrow Icon -->
+      <span class="material-symbols-outlined text-base text-gray-500 transition-transform duration-300 group-hover:-rotate-45">
+        arrow_forward
+      </span>
+    </a> 
+
+  </div>
+</section>
 
         <!-- Contact Section -->
         <section class="relative p-6 text-center">
