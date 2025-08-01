@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Me – Andy Hyatt</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script>
+  // Immediately apply saved theme before anything renders
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else if (savedTheme === "light") {
+    document.documentElement.classList.remove("dark");
+  }
+</script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0"></script>
   <script>
@@ -358,13 +367,21 @@
       bg.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    function toggleTheme() {
-      const root = document.documentElement;
-      const tooltip = document.getElementById('theme-tooltip');
-      const isDark = root.classList.contains('dark');
-      root.classList.toggle('dark');
-      if (tooltip) tooltip.textContent = isDark ? 'Dark mode' : 'Light mode';
-    }
+function toggleTheme() {
+  const root = document.documentElement;
+  const tooltip = document.getElementById('theme-tooltip');
+  const isDark = root.classList.contains('dark');
+
+  if (isDark) {
+    root.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+    if (tooltip) tooltip.textContent = 'Dark mode';
+  } else {
+    root.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    if (tooltip) tooltip.textContent = 'Light mode';
+  }
+}
 
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
