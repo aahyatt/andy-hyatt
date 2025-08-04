@@ -7,19 +7,28 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
           colors: {
-            pastelPink: '#FFD1DC',
-            pastelMint: '#C1F5D3',
-            pastelLilac: '#E0BBE4',
-            pastelYellow: '#FFF3B0',
-            pastelBlue: '#B3E5FC',
+            pastelPurple: '#D7C9FF',
+            pastelBlue: '#CFEAFE',
+            pastelPink: '#FFD6E8',
+            pastelTeal: '#B2F2E3',
+            accent: '#A58CFF',
+            softGray: '#f9f9f9',
+          },
+          borderRadius: {
+            xl: '1rem',
+            '2xl': '1.25rem'
           }
         }
       }
@@ -41,39 +50,40 @@
     }
   </script>
 </head>
-<body class="bg-pastelBlue text-gray-800 font-sans min-h-screen px-4 py-10">
-  <div class="max-w-xl mx-auto flex flex-col justify-between min-h-screen">
+
+<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-8 pb-16">
+  <div class="max-w-md mx-auto space-y-6">
 
     <!-- Header -->
     <div class="text-center">
-      <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full border-4 border-pastelMint bg-white shadow-md">
-        <span class="material-symbols-outlined text-4xl text-pastelPink">pets</span>
+      <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full border-4 border-pastelTeal bg-white shadow-sm">
+        <span class="material-symbols-outlined text-3xl text-accent">pets</span>
       </div>
-      <h1 class="text-3xl font-bold mt-4 text-pastelLilac">Welcome, my Grizzly 🐻</h1>
+      <h1 class="text-2xl font-bold mt-3 text-accent">Hello Grizzly 🐻</h1>
     </div>
 
     <!-- Poem / Clue -->
-    <div class="bg-white border border-pastelMint rounded-xl p-6 space-y-4 shadow-sm mt-8">
+    <div class="bg-white border border-pastelPurple rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed">
       <p>Before your adventure goes ahead,<br>
       Let’s check your paws, your heart, and your head.<br>
       My grizzly is strong, but just in case,<br>
       We’ll start across from our cozy base.</p>
 
-      <p>Where healers help and doors swing wide,<br>
+      <p class="mt-4">Where healers help and doors swing wide,<br>
       A little code is your guide.<br>
       Look by the place where coughs are heard,<br>
       Your first clue waits beneath the word.</p>
     </div>
 
     <!-- QR Scan Button -->
-    <div class="mt-12 text-center">
+    <div class="text-center mt-6">
       <button
         onclick="showScanInstructions()"
-        class="px-6 py-3 rounded-full bg-pastelPink text-gray-800 font-semibold shadow hover:opacity-90 transition"
+        class="px-6 py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-medium shadow hover:opacity-90 transition"
       >
-        Scan the QR code 🔍
+        Scan the QR Code 🔍
       </button>
-      <p id="scan-tip" class="mt-3 text-sm text-gray-600 hidden">Tip: Open your iPhone camera and point it at the QR code to continue!</p>
+      <p id="scan-tip" class="mt-3 text-sm text-gray-600 hidden">Tip: Open your iPhone camera and point it at the QR code nearby.</p>
     </div>
 
   </div>

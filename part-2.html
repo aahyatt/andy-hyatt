@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Grizzly Adventure - Step 2</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            pastelPurple: '#D7C9FF',
+            pastelBlue: '#CFEAFE',
+            pastelPink: '#FFD6E8',
+            pastelTeal: '#B2F2E3',
+            accent: '#A58CFF',
+            softGray: '#f9f9f9',
+          },
+          borderRadius: {
+            xl: '1rem',
+            '2xl': '1.25rem'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-8 pb-16">
+  <div class="max-w-md mx-auto space-y-6">
+
+    <!-- Header -->
+    <div class="text-center">
+      <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full border-4 border-pastelTeal bg-white shadow-sm">
+        <span class="material-symbols-outlined text-3xl text-accent">pets</span>
+      </div>
+      <h1 class="text-2xl font-bold mt-3 text-accent">Question, question, question</h1>
+    </div>
+
+    <!-- Question -->
+    <div class="bg-white border border-pastelPurple rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed">
+      <p class="font-medium text-gray-700 mb-2">Question:</p>
+      <p class="mb-4">Where did we celebrate your 30th birthday?</p>
+
+      <input
+        id="answer"
+        type="text"
+        placeholder="Enter your answer"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pastelPurple text-center"
+        onkeydown="if(event.key==='Enter'){checkAnswer()}"
+      />
+
+      <button
+        onclick="checkAnswer()"
+        class="mt-4 w-full py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-semibold shadow hover:opacity-90 transition"
+      >
+        Check answer
+      </button>
+    </div>
+
+<!-- Hidden clue -->
+<div id="clue" class="hidden bg-white border border-pastelPink rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed whitespace-pre-line">
+  <p class="font-medium text-gray-700 mb-4">Next Clue:</p>
+  <p>
+Look who’s grinning from up on that wall,  
+Oran’s giant pal who’s not so small.  
+Nearby, some landlocked birds begin to sprawl.  
+They spit and children shout,  
+This spot, you’re certainly grumbled about.  
+Three benches face the beast you know,  
+Look beneath the middle, low.
+  </p>
+</div>
+
+
+  </div>
+
+  <script>
+    function checkAnswer() {
+      const input = document.getElementById('answer').value.trim().toLowerCase();
+      const clue = document.getElementById('clue');
+
+      if (input === 'tuscany') {
+        clue.classList.remove('hidden');
+        clue.scrollIntoView({ behavior: "smooth" });
+      } else {
+        alert("Hmm... that’s not quite right. Try again, Grizzly 🐻");
+      }
+    }
+  </script>
+</body>
+</html>
