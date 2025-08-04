@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andy Hyatt – Neumorphic Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accentLight: '#8b5cf6', // purple
+            accentDark: '#14b8a6',  // teal
+            bgLight: '#d1d5db',     // gray
+            bgDark: '#1f2937'       // charcoal
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .neumorphic {
+      border-radius: 1.5rem;
+      background: #d1d5db;
+      box-shadow: 6px 6px 12px #b1b5bd, -4px -4px 8px #f0f0f0;
+    }
+    .dark .neumorphic {
+      background: #1f2937;
+      box-shadow: 4px 4px 8px #111827, -2px -2px 6px #2d3748;
+    }
+
+    .neumorphic-inset {
+      border-radius: 1.5rem;
+      background: #d1d5db;
+      box-shadow: inset 3px 3px 6px #b1b5bd, inset -3px -3px 6px #f0f0f0;
+    }
+    .dark .neumorphic-inset {
+      background: #1f2937;
+      box-shadow: inset 2px 2px 4px #111827, inset -2px -2px 4px #2d3748;
+    }
+
+    .neumorphic-button {
+      border-radius: 9999px;
+      background: #d1d5db;
+      box-shadow: 3px 3px 6px #b1b5bd, -3px -3px 6px #f0f0f0;
+      transition: all 0.2s ease;
+    }
+    .dark .neumorphic-button {
+      background: #1f2937;
+      box-shadow: 2px 2px 4px #111827, -2px -2px 4px #2d3748;
+    }
+    .neumorphic-button:hover {
+      box-shadow: inset 3px 3px 6px #b1b5bd, inset -3px -3px 6px #f0f0f0;
+    }
+    .dark .neumorphic-button:hover {
+      box-shadow: inset 2px 2px 4px #111827, inset -2px -2px 4px #2d3748;
+    }
+  </style>
+</head>
+<body class="bg-bgLight dark:bg-bgDark text-gray-800 dark:text-gray-100 font-sans transition-colors duration-300">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      const root = document.documentElement;
+      if (savedTheme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+    });
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+  </script>
+
+  <div class="max-w-xl mx-auto px-6 py-12">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-4 z-50 neumorphic p-4 mb-12">
+      <div class="flex justify-between items-center">
+        <!-- Left Nav Icons -->
+        <div class="flex items-center gap-4">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-r from-purple-400 to-green-400 text-xs select-none">
+            AH
+          </div>
+
+          <a href="index.html" class="neumorphic-button w-9 h-9 flex items-center justify-center">
+            <span class="material-symbols-outlined text-sm">home</span>
+          </a>
+
+          <a href="about.html" class="neumorphic-button w-9 h-9 flex items-center justify-center">
+            <span class="material-symbols-outlined text-sm">person_4</span>
+          </a>
+
+          <a href="projects.html" class="neumorphic-button w-9 h-9 flex items-center justify-center">
+            <span class="material-symbols-outlined text-sm">assignment</span>
+          </a>
+        </div>
+
+        <!-- Right Buttons -->
+        <div class="flex items-center gap-4">
+          <button onclick="toggleTheme()" class="neumorphic-button w-9 h-9 flex items-center justify-center">
+            <span class="material-symbols-outlined text-sm">dark_mode</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="neumorphic p-6">
+      <!-- Header -->
+      <header class="p-8 text-center mb-12">
+        <h1 class="text-4xl font-bold mb-2">Andy Hyatt</h1>
+        <p class="text-lg">Content Designer & UX Strategist</p>
+      </header>
+
+      <!-- About Section -->
+      <section class="p-8 mb-12">
+        <h2 class="text-2xl font-semibold mb-4">About Me</h2>
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+          I'm a content designer who crafts user-centered strategies and clear, impactful language. I bring UX thinking and editorial clarity together to shape intuitive digital experiences.
+        </p>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Projects</h2>
+        <div class="flex flex-col gap-8">
+          <!-- Project Card 1 -->
+          <div class="neumorphic overflow-hidden">
+            <img src="./Resources/Images/Quentic Platform.webp" alt="Project Image" class="w-full h-48 object-cover rounded-t-2xl">
+            <div class="p-6 flex justify-between items-start">
+              <div class="pr-4">
+                <h3 class="text-lg font-semibold">Project One</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Modern UI design with smooth interactions and subtle depth effects.</p>
+              </div>
+              <div class="pt-1">
+                <svg class="w-6 h-6 text-gray-500 transition-transform duration-300 group-hover:-rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 2 -->
+          <div class="neumorphic overflow-hidden">
+            <img src="https://via.placeholder.com/600x300" alt="Project Image" class="w-full h-48 object-cover rounded-t-2xl">
+            <div class="p-6 flex justify-between items-start">
+              <div class="pr-4">
+                <h3 class="text-lg font-semibold">Project Two</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Dashboard experience focused on clarity, motion, and ease of use.</p>
+              </div>
+              <div class="pt-1">
+                <svg class="w-6 h-6 text-gray-500 transition-transform duration-300 group-hover:-rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="p-8 text-center">
+        <h2 class="text-xl font-semibold mb-4">Let's Work Together</h2>
+        <p class="mb-6 text-gray-600 dark:text-gray-400">I'm open to freelance, consulting, or full-time roles in product teams that value clear content and inclusive design.</p>
+        <button class="neumorphic-button px-6 py-2 text-sm font-medium text-gray-700 dark:text-gray-200">Get in Touch</button>
+      </section>
+
+      <!-- Footer -->
+      <footer class="text-center text-xs text-gray-500 dark:text-gray-400 mt-12">
+        &copy; 2025 Andy Hyatt. All rights reserved.
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
