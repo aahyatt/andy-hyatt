@@ -52,15 +52,15 @@
     };
   </script>
 
-  <!-- Password Protection -->
+    <!-- Password Protection -->
   <script>
     const correctPassword = "Grizzly";
     const entered = sessionStorage.getItem("authenticated");
     if (entered !== correctPassword) {
-      const input = prompt("Grizzly checkpoint 🐻\nWhat is your name?");
+      const input = prompt("Security checkpoint 🐻\nWhat is your name?");
       if (input !== correctPassword) {
         alert("Incorrect password. Redirecting...");
-        window.location.href = "/";
+        window.location.href = "https://www.google.com/";
       } else {
         sessionStorage.setItem("authenticated", correctPassword);
       }

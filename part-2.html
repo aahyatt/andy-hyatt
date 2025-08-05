@@ -37,6 +37,21 @@
       }
     };
   </script>
+    <!-- Password Protection -->
+  <script>
+    const correctPassword = "Grizzly";
+    const entered = sessionStorage.getItem("authenticated");
+    if (entered !== correctPassword) {
+      const input = prompt("Security checkpoint 🐻\nWhat is your name?");
+      if (input !== correctPassword) {
+        alert("Incorrect password. Redirecting...");
+        window.location.href = "https://www.google.com/";
+      } else {
+        sessionStorage.setItem("authenticated", correctPassword);
+      }
+    }
+  </script>
+
 </head>
 
 <body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-8 pb-16">
