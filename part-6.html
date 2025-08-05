@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Grizzly Adventure - Step 4</title>
+  <title>Grizzly Adventure - Part 6</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-  <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -50,68 +49,76 @@
       <h1 class="text-2xl font-bold mt-3 text-accent">Grizzly Checkpoint</h1>
     </div>
 
-    <!-- Question -->
+    <!-- Riddle -->
     <div class="bg-white border border-pastelPurple rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed">
-      <p class="font-medium text-gray-700 mb-2">Question:</p>
-      <p class="mb-4">So, what's the right number?</p>
+      <p>
+We wandered paths of gravel and grace,  
+Where light once danced on your thoughtful face.  
+Now colored marks are all that remain,  
+To lead you back through memory’s lane. <br><br>
 
+Gray like clouds that block the day,  
+Pink like smiles that drift away.  
+Red burns loud, and yellow lies —  
+It flickers fast, then says goodbye.<br><br>
+
+Purple hides in quiet dreams,  
+Blue pretends to know what green means.  
+But what endures, calm and slow,  
+Is not the one that needs to show.<br><br>
+
+So choose with heart — not fire, not frost,  
+But the shade that’s never lost.
+      </p>
+    </div>
+
+    <!-- Map Image -->
+    <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm text-center">
+      <img
+        src="./Resources/Images/map.png"
+        alt="Park map with colored dots"
+        class="w-full rounded-lg border border-gray-300"
+      />
+      <p class="mt-2 text-sm text-gray-600"></p>
+    </div>
+
+    <!-- Answer input -->
+    <div class="bg-white border border-pastelBlue rounded-2xl p-5 shadow-sm text-[16px] space-y-4">
+      <p class="font-medium text-gray-700">Where do you need to go?</p>
       <input
         id="answer"
         type="text"
-        placeholder="Enter your answer"
+        placeholder="Enter a color"
         class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pastelPurple text-center"
         onkeydown="if(event.key==='Enter'){checkAnswer()}"
       />
-
       <button
         onclick="checkAnswer()"
-        class="mt-4 w-full py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-semibold shadow hover:opacity-90 transition"
+        class="w-full py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-semibold shadow hover:opacity-90 transition"
       >
         Check answer
       </button>
     </div>
 
-    <!-- Hidden clue -->
-    <div id="clue" class="hidden bg-white border border-pastelPink rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed whitespace-pre-line">
-      <p>
-You’ve faced the beast, you’ve passed the spray,  
-Now it’s time to for a sweeter way.  
-The grizzly growls when cake is near,  
-Especially when it’s dense and dear.  
-Find the place nearby the chimes,  
-Where cake sings in creamy rhymes.
-      </p>
+    <!-- Clue shown on correct answer -->
+    <div id="clue" class="hidden bg-white border border-pastelPink rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed">
+      <p class="font-medium text-gray-700 mb-2">Next Step:</p>
+      <p>Well done, Grizzly! 🐻 Head to the <strong>dot</strong> on the map.</p>
     </div>
 
-    <!-- QR Scan Button -->
-    <div class="text-center mt-6">
-      <button
-        onclick="showScanInstructions()"
-        class="px-6 py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-medium shadow hover:opacity-90 transition"
-      >
-        Scan the QR code 🔍
-      </button>
-      <p id="scan-tip" class="mt-3 text-sm text-gray-600 hidden">Tip: Open your camera and point it at the QR code nearby.</p>
-    </div>
   </div>
 
   <script>
     function checkAnswer() {
-      const input = document.getElementById('answer').value.trim();
+      const input = document.getElementById('answer').value.trim().toLowerCase();
       const clue = document.getElementById('clue');
 
-      if (input === '196') {
+      if (input === 'green') {
         clue.classList.remove('hidden');
         clue.scrollIntoView({ behavior: "smooth" });
       } else {
-        alert("Not quite, my Grizzly 🐾 Try again.");
+        alert("That’s not quite it. Try again, Grizzly 🐾");
       }
-    }
-
-    function showScanInstructions() {
-      const tip = document.getElementById("scan-tip");
-      tip.classList.remove("hidden");
-      tip.scrollIntoView({ behavior: "smooth" });
     }
   </script>
 </body>

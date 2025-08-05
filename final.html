@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Grizzly Adventure – The End?</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            pastelPurple: '#D7C9FF',
+            pastelBlue: '#CFEAFE',
+            pastelPink: '#FFD6E8',
+            pastelTeal: '#B2F2E3',
+            accent: '#A58CFF',
+            softGray: '#f9f9f9',
+          },
+          borderRadius: {
+            xl: '1rem',
+            '2xl': '1.25rem'
+          },
+          animation: {
+            fadeInUp: 'fadeInUp 0.8s ease-out both'
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-12 pb-16">
+  <div class="max-w-md mx-auto text-center space-y-8 animate-fadeInUp">
+
+    <!-- Icon -->
+    <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full border-4 border-pastelPink bg-white shadow-sm">
+      <span class="material-symbols-outlined text-4xl text-accent">pets</span>
+    </div>
+
+    <!-- Final Clue -->
+    <div class="bg-white border border-pastelPurple rounded-2xl p-6 shadow-sm text-[16px] leading-relaxed whitespace-pre-line">
+The music fades, the journey ends,  
+But something waits where stories bend.  
+Return to warmth, return to light,  
+Where cabinets hide things out of sight.
+
+You’ll find what didn’t come in time,  
+But words can still be gift and sign.  
+So crawl a bit, you know the place —  
+Behind the things, in that Noah space.
+    </div>
+
+  </div>
+</body>
+</html>
