@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Grizzly Adventure - Step 2</title>
+  <title>Grizzly Adventure - Step 3</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -39,21 +39,21 @@
   </script>
 </head>
 
-<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-8 pb-16">
+<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-10 pb-16">
   <div class="max-w-md mx-auto space-y-6">
 
     <!-- Header -->
     <div class="text-center">
       <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full border-4 border-pastelTeal bg-white shadow-sm">
-        <span class="material-symbols-outlined text-3xl text-accent">pets</span>
+        <span class="material-symbols-outlined text-3xl text-accent">lock</span>
       </div>
-      <h1 class="text-2xl font-bold mt-3 text-accent">Question, question, question</h1>
+      <h1 class="text-2xl font-bold mt-3 text-accent">Grizzly Checkpoint 🔐</h1>
     </div>
 
     <!-- Question -->
     <div class="bg-white border border-pastelPurple rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed">
       <p class="font-medium text-gray-700 mb-2">Question:</p>
-      <p class="mb-4">Where did we celebrate your 30th birthday?</p>
+      <p class="mb-4">Where was his cousin, Oran, born?</p>
 
       <input
         id="answer"
@@ -71,39 +71,30 @@
       </button>
     </div>
 
-<!-- Fixed Hidden Clue -->
-<div id="clue" class="hidden bg-white border border-pastelPink rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed space-y-6">
-  <div class="whitespace-pre-line">
-    <p>
-Look who’s grinning from up on that wall,  
-Oran’s giant pal who’s not so small.  
-Nearby, some landlocked birds begin to sprawl.  
-They spit and children shout,  
-This spot, you’re certainly grumbled about.  
-Three benches face the beast you know,  
-Look beneath the middle, low.
-    </p>
-  </div>
+    <!-- Hidden clue -->
+    <div id="clue" class="hidden bg-white border border-pastelPink rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed whitespace-pre-line">
+      <p>
+For nearly a decade, the grizzly stared through the same glass each day.  
+Past the tower’s hourly toll,  
+Over the screeches of little beasts at plat,  
+Beneath the smoky neighbor’s daily ritual.  
+The view changed little, but the panes caught every season.  
+Return there now,  
+Let your eyes trace every memory-  
+One square at a time.
+      </p>
+    </div>
 
-  <!-- Help button -->
-  <div>
-    <button
-      onclick="showHint()"
-      class="w-full py-3 rounded-full bg-gradient-to-r from-pastelPink to-pastelBlue text-gray-800 font-semibold shadow hover:opacity-90 transition"
-    >
-      Need some help?
-    </button>
-  </div>
-
-  <!-- Image hint -->
-  <div id="hint-image" class="hidden text-center">
-    <img
-      src="./Resources/Images/monkey.jpeg"
-      alt="Hint image"
-      class="w-full rounded-xl border border-gray-300 shadow-sm"
-    />
-  </div>
-</div>
+    <!-- QR Scan Button -->
+    <div class="text-center mt-6">
+      <button
+        onclick="showScanInstructions()"
+        class="px-6 py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-medium shadow hover:opacity-90 transition"
+      >
+        Scan the QR code 🔍
+      </button>
+      <p id="scan-tip" class="mt-3 text-sm text-gray-600 hidden">Tip: Open your camera and point it at the QR code nearby.</p>
+    </div>
   </div>
 
   <script>
@@ -111,18 +102,18 @@ Look beneath the middle, low.
       const input = document.getElementById('answer').value.trim().toLowerCase();
       const clue = document.getElementById('clue');
 
-      if (input === 'tuscany') {
+      if (input === 'okinawa') {
         clue.classList.remove('hidden');
         clue.scrollIntoView({ behavior: "smooth" });
       } else {
-        alert("Hmm... that’s not quite right. Try again, Grizzly 🐻");
+        alert("That doesn’t sound right, Grizzly 🐾 Try again.");
       }
     }
 
-    function showHint() {
-      const hint = document.getElementById('hint-image');
-      hint.classList.remove('hidden');
-      hint.scrollIntoView({ behavior: "smooth" });
+    function showScanInstructions() {
+      const tip = document.getElementById("scan-tip");
+      tip.classList.remove("hidden");
+      tip.scrollIntoView({ behavior: "smooth" });
     }
   </script>
 </body>

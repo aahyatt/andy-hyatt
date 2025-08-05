@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Grizzly Adventure - Step 5</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            pastelPurple: '#D7C9FF',
+            pastelBlue: '#CFEAFE',
+            pastelPink: '#FFD6E8',
+            pastelTeal: '#B2F2E3',
+            accent: '#A58CFF',
+            softGray: '#f9f9f9',
+          },
+          borderRadius: {
+            xl: '1rem',
+            '2xl': '1.25rem'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-10 pb-16">
+  <div class="max-w-md mx-auto space-y-6">
+
+    <!-- Header -->
+    <div class="text-center">
+      <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full border-4 border-pastelPink bg-white shadow-sm">
+        <span class="material-symbols-outlined text-3xl text-accent">cake</span>
+      </div>
+      <h1 class="text-2xl font-bold mt-3 text-accent">Grizzly Checkpoint 🐾</h1>
+    </div>
+
+<!-- Question Section -->
+<div class="bg-white border border-pastelPurple rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed space-y-4">
+  <p class="whitespace-pre-line">
+You, my grizzly, have a problem.  
+The cheesecake here is just too good.  
+Imagine this:  
+• One slice has 30 grams of fat  
+• You eat one slice a day for a year (365 days)  
+• Your body turns 80% of that fat into stored body fat  
+• 1 kg of fat = 7,700 calories = ~1,100g of fat  
+• You currently weigh 88 kg  
+How much would you weigh after one year?  
+(Assume no exercise. Just pure cheesecake life.)
+  </p>
+
+  <input
+    id="answer"
+    type="text"
+    placeholder="Enter your answer"
+    class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pastelPurple text-center"
+    onkeydown="if(event.key==='Enter'){checkAnswer()}"
+  />
+
+  <button
+    onclick="checkAnswer()"
+    class="w-full py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-semibold shadow hover:opacity-90 transition"
+  >
+    Check answer
+  </button>
+
+  <!-- Reveal solution button appears here now -->
+  <button
+    onclick="toggleSolution()"
+    class="w-full py-3 rounded-full bg-gradient-to-r from-pastelPink to-pastelBlue text-gray-800 font-semibold shadow hover:opacity-90 transition"
+  >
+    Reveal solution
+  </button>
+
+  <!-- Solution block -->
+  <div id="solution" class="hidden bg-softGray border border-gray-200 rounded-2xl p-4 shadow-sm text-[15px] whitespace-pre-line">
+30g fat × 365 days = 10,950g fat total  
+80% stored as fat = 0.8 × 10,950 = 8,760g  
+8,760g ÷ 1,100g per kg = ~7.96kg fat gained  
+88kg + 7.96kg ≈ 96kg
+  </div>
+</div>
+
+<!-- Hidden clue block (only after correct answer) -->
+<div id="clue-block" class="hidden space-y-6">
+  <div class="bg-white border border-pastelPink rounded-2xl p-5 shadow-sm text-[16px] leading-relaxed">
+    <p class="font-medium text-gray-700 mb-2">Next Clue:</p>
+    <p>This is where the clue text will appear</p>
+  </div>
+
+  <!-- QR Scan Button -->
+  <div class="text-center">
+    <button
+      onclick="showScanInstructions()"
+      class="w-full py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-medium shadow hover:opacity-90 transition"
+    >
+      Scan the QR code 🔍
+    </button>
+    <p id="scan-tip" class="mt-3 text-sm text-gray-600 hidden">Tip: Open your camera and point it at the QR code nearby.</p>
+  </div>
+</div>
+
+  </div>
+
+  <script>
+    function checkAnswer() {
+      const input = document.getElementById('answer').value.trim();
+      const clue = document.getElementById('clue-block');
+
+      if (input === '96') {
+        clue.classList.remove('hidden');
+        clue.scrollIntoView({ behavior: "smooth" });
+      } else {
+        alert("Not quite, Grizzly 🐻 Try again!");
+      }
+    }
+
+    function toggleSolution() {
+      const solution = document.getElementById('solution');
+      solution.classList.toggle('hidden');
+      solution.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showScanInstructions() {
+      const tip = document.getElementById("scan-tip");
+      tip.classList.remove("hidden");
+      tip.scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Grizzly Adventure - Welcome</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            pastelPurple: '#D7C9FF',
+            pastelBlue: '#CFEAFE',
+            pastelPink: '#FFD6E8',
+            pastelTeal: '#B2F2E3',
+            accent: '#A58CFF',
+            softGray: '#f9f9f9',
+          },
+          borderRadius: {
+            xl: '1rem',
+            '2xl': '1.25rem'
+          },
+          animation: {
+            fadeInUp: 'fadeInUp 0.8s ease-out both',
+            fadeIn: 'fadeIn 1s ease-in-out both'
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            },
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Password Protection -->
+  <script>
+    const correctPassword = "Grizzly";
+    const entered = sessionStorage.getItem("authenticated");
+    if (entered !== correctPassword) {
+      const input = prompt("Grizzly checkpoint 🐻\nWhat is your name?");
+      if (input !== correctPassword) {
+        alert("Incorrect password. Redirecting...");
+        window.location.href = "/";
+      } else {
+        sessionStorage.setItem("authenticated", correctPassword);
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-softGray text-gray-800 font-sans min-h-screen px-4 pt-12 pb-16">
+  <div class="max-w-md mx-auto text-center space-y-8">
+
+    <!-- Grizzly Icon -->
+    <div class="w-20 h-20 mx-auto flex items-center justify-center rounded-full border-4 border-pastelTeal bg-white shadow-sm animate-fadeInUp">
+      <span class="material-symbols-outlined text-4xl text-accent">pets</span>
+    </div>
+
+    <!-- Welcome Message -->
+    <div class="animate-fadeInUp">
+      <h1 class="text-3xl font-bold text-accent mb-3">Welcome, Grizzly 🐻</h1>
+      <p class="text-[16px] leading-relaxed px-2">
+        It’s time to begin your birthday adventure! 🎉<br />
+        Each clue will guide you closer to surprises, memories, and hopefully a tiny bit of fun — crafted just for you.
+      </p>
+    </div>
+
+    <!-- Start Button -->
+    <div class="animate-fadeInUp delay-200">
+      <a
+        href="part-1.html"
+        class="inline-block mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-pastelPurple to-pastelBlue text-white font-medium shadow hover:opacity-90 transition"
+      >
+        Start adventure 🚀
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>
